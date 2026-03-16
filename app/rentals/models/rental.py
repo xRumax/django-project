@@ -1,5 +1,6 @@
 from django.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
+from django.core.exceptions import ValidationError
 from django.conf import settings
 import datetime
 from rentals.services import rental_service
@@ -32,6 +33,11 @@ class Rental(models.Model):
     status = models.CharField(choices=RENT_CHOICES)
     start_mileage = models.PositiveIntegerField()
     end_mileage = models.PositiveIntegerField(null = True, blank = True)
+
+    def clean(self):
+        # End date vs Start date
+        if self.start_date and self.end_date and self.end_date < self.start_date:
+            raise ValidationError({"end_date": "End date "})
 
     def __str__(self):
         return f"{self.user} - {self.car} ({self.start_date})"
