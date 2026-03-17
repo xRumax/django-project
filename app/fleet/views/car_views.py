@@ -3,7 +3,7 @@ from fleet.models.car import Car
 from fleet.serializers.car_serializer import CarSerializer
 
 class CarViewSet(ModelViewSet):
-    queryset = Car.objects.all()
+    queryset = Car.objects.all().order_by('id')
     serializer_class = CarSerializer
 
 
