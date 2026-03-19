@@ -37,7 +37,7 @@ class Rental(models.Model):
     def clean(self):
         # End date vs Start date
         if self.start_date and self.end_date and self.end_date < self.start_date:
-            raise ValidationError({"end_date": "End date "})
+            raise ValidationError({"end_date": "End date must be after start date"})
 
     def __str__(self):
         return f"{self.user} - {self.car} ({self.start_date})"
