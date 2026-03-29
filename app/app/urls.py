@@ -22,6 +22,7 @@ from drf_spectacular.views import (
 ) 
 from fleet.urls import router as fleet_router
 from accounts.urls import router as users_router
+from rentals.urls import router as rentals_router
 
 
 urlpatterns = [
@@ -30,4 +31,5 @@ urlpatterns = [
     path("api/docs/",SpectacularSwaggerView.as_view(url_name ="schema"), name = "swagger-ui"),
     path("api/", include(fleet_router.urls)),
     path("api/", include(users_router.urls)),
+    path("api/", include(rentals_router.urls)),
 ]
