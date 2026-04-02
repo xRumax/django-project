@@ -21,7 +21,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY")
+SECRET_KEY = os.environ["DJANGO_SECRET_KEY"]
 DEBUG = os.environ.get("DEBUG", "False").lower() in ("true", "t", "1")
 ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS", "127.0.0.1").split(",")
 
@@ -144,13 +144,22 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'accounts.User'
 
 REST_FRAMEWORK = {
-    "DEFAULT_AUTHENTICATION_CLASSES":('rest_framework_simplejwt.authentication.JWTAuthentication',),
+    "DEFAULT_AUTHENTICATION_CLASSES":['rest_framework_simplejwt.authentication.JWTAuthentication',],
     "DEFAULT_PERMISSION_CLASSES":[
-        "rest_framework.permissions.isAuthenticated",
+        "rest_framework.permissions.IsAuthenticated",
     ],
     "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
     "DEFAULT_RENDERER_CLASSES": [
         "rest_framework.renderers.JSONRenderer",
         "rest_framework.renderers.BrowsableAPIRenderer",
     ],
+}
+
+from datetime import timedelta
+
+SIMPLE_JWT ={
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes = 5),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
+    'ROTATE_REFRESH_TOKENS': True,
+    'BACKLIST_AFTER_ROTATION': True,
 }
