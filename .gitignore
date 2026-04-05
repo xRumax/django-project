@@ -1,29 +1,51 @@
-# Python
-__pycache__/
-*.py[cod]
-*$py.class
-venv/
-.venv/
-
-# Pytest
-.pytest_cache/
-
-# Django
-db.sqlite3
-staticfiles/
-media/
-.env
-
-# Docker
-.dockerignore
-# (Opcjonalnie, jeśli używasz lokalnych wolumenów dla bazy danych w folderze projektu)
-postgres_data/
-
-# IDE
-.vscode/
-.idea/
-
-# Systemowe
+# --- Systemowe & IDE ---
 .DS_Store
 Thumbs.db
+.vscode/
+.idea/
+*.swp
+*.log
 
+# --- Środowisko i Sekrety (KLUCZOWE) ---
+.env
+.env.*
+!.env.example
+secrets.json
+*.local
+
+# --- Python / Django (Backend) ---
+**/__pycache__/
+**/*.py[cod]
+**/*$py.class
+**/.venv/
+**/venv/
+**/.pytest_cache/
+**/.coverage
+**/htmlcov/
+
+# Dane Django
+**/db.sqlite3
+**/db.sqlite3-journal
+**/staticfiles/
+**/media/
+
+# --- Node / React / Vite (Frontend) ---
+**/node_modules/
+**/dist/
+**/build/
+**/.eslintcache
+**/.prettiercache
+**/npm-debug.log*
+**/yarn-debug.log*
+**/yarn-error.log*
+**/.pnp
+**/.pnp.js
+
+# --- Docker & Bazy Danych ---
+.dockerignore
+**/postgres_data/
+**/pgadmin_data/
+
+# --- Inne ---
+LICENSE
+README.md
