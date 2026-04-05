@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     'rentals',
     'rest_framework',
     'drf_spectacular',
-    'coreheaders',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
@@ -82,11 +82,11 @@ WSGI_APPLICATION = 'app.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.{}'.format(os.getenv("DATABASE_ENGINE", 'sqlite3')),
-        'NAME': os.getenv('DATABASE_NAME','db.sqlite3'),
-        'USER': os.getenv("DATABASE_USERNAME", "user"),
-        'PASSWORD': os.getenv("DATABASE_PASSWORD", "password"),
-        'HOST': os.getenv("DATABASE_HOST", "127.0.0.1"),
+        'ENGINE': f'django.db.backends.{os.environ["DATABASE_ENGINE"]}',
+        'NAME': os.environ['DATABASE_NAME'],
+        'USER': os.environ["DATABASE_USERNAME"],
+        'PASSWORD': os.environ["DATABASE_PASSWORD"],
+        'HOST': os.getenv("DATABASE_HOST", "db"),
         'PORT': os.getenv("DATABASE_PORT", "5432")
     }
 }
@@ -138,6 +138,10 @@ STORAGES = {
     }
 }
 
+# Path for images 
+MEDIA_URL = '/media/'
+NEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
@@ -166,21 +170,12 @@ SIMPLE_JWT ={
     'BACKLIST_AFTER_ROTATION': True,
 }
 
-from corsheaders.defaults import default_headers
-
-CORS_ALLOW_HEADERS = list(default_headers) + [
-    "Authorization",
-    "X-Custom-Header",
-]
 
 CORS_ALLOWED_ORIGINS = [
-    "localhost:3000"
+    "http://localhost:3000",
+    "http://localhost:5173",
+    "http://127.0.0.1:3000",
+    "http://127.0.0.1:5173",
 ]
 
-CORS_ALLOW_METHODS = [
-    "GET",
-    "POST",
-    "PUT",
-    "DELETE",
-    "OPTIONS",
-]
+CORS_ALLOW_CREDENTIALS = True
