@@ -41,9 +41,11 @@ INSTALLED_APPS = [
     'rentals',
     'rest_framework',
     'drf_spectacular',
+    'coreheaders',
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -163,3 +165,22 @@ SIMPLE_JWT ={
     'ROTATE_REFRESH_TOKENS': True,
     'BACKLIST_AFTER_ROTATION': True,
 }
+
+from corsheaders.defaults import default_headers
+
+CORS_ALLOW_HEADERS = list(default_headers) + [
+    "Authorization",
+    "X-Custom-Header",
+]
+
+CORS_ALLOWED_ORIGINS = [
+    "localhost:3000"
+]
+
+CORS_ALLOW_METHODS = [
+    "GET",
+    "POST",
+    "PUT",
+    "DELETE",
+    "OPTIONS",
+]

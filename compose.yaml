@@ -12,9 +12,11 @@ services:
     env_file:
       - .env
 
-  rent_car_django:
-    build: .
-    container_name: rent_car_django
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: backend
     ports:
       - "8000:8000"
     depends_on:
@@ -33,6 +35,6 @@ services:
     env_file:
       - .env
     volumes:
-      - .:/app
+      - ./backend:/app
 volumes:
   postgres_data:
