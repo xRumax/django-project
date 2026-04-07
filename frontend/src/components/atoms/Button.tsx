@@ -1,6 +1,6 @@
 interface ButtonProps {
   label: string;
-  onClick: () => void;
+  onClick?: () => void;
   type?: "button" | "submit";
   variant?: "primary" | "secondary" | "danger";
   disabled?: boolean;
@@ -15,7 +15,10 @@ export const Button = ({
   return (
     <button
       type={type}
-      className="bg-blue-600 cursor-pointer"
+      className="bg-blue-800 w-24 h-10 text-white rounded shadow-md hover:bg-blue-500 cursor-pointer
+      active:scale-95
+      transition-all duration-150 ease-in-out
+      active:shadow-inner"
       onClick={onClick}
       disabled={disabled}
     >
