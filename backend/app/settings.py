@@ -25,6 +25,9 @@ SECRET_KEY = os.environ["DJANGO_SECRET_KEY"]
 DEBUG = os.environ.get("DEBUG", "False").lower() in ("true", "t", "1")
 ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS", "127.0.0.1").split(",")
 
+# External API Key
+NINJA_API_KEY = os.environ.get('NINJA_API_KEY', 'default_secret_key')
+
 # SECURITY WARNING: don't run with debug turned on in production!
 
 # Application definition

@@ -11,7 +11,9 @@ def sample_car(db):
     model="Model S",
     year=2024,
     hp=670,
-    engine_type = 'petrol'
+    engine_type = 'petrol',
+    vin = "12345678901234567",
+    number_plate = "NBA32143",
 )
 
 @pytest.fixture
@@ -30,3 +32,5 @@ def sample_rental(db, sample_car, sample_user):
         end_date = date(2026,5,5),
         start_mileage = 10000,
     )
+
+#BULK / zewnętrzne API
