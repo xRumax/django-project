@@ -1,5 +1,5 @@
 from django.db import models
-from fleet.services.car_services import check_car_year
+from fleet.validators.validators import check_car_year
 
 class Car(models.Model):
     class Meta: 
@@ -11,6 +11,7 @@ class Car(models.Model):
         ('diesel', 'Diesel'),
         ('electric', 'Electric'),
         ('hybrid', 'Hybrid'),
+        ('gas', 'Gas')
     ]
     brand = models.CharField(max_length=50)
     model = models.CharField(max_length=50)
@@ -21,6 +22,7 @@ class Car(models.Model):
                                     default = 'petrol')
     number_plate = models.CharField(max_length = 10, unique = True, verbose_name="Number Plate")
     vin = models.CharField(max_length = 17, unique = True, verbose_name="VIN Number")
+    image = models.ImageField(upload_to='cars/', null=True, blank=True)
     
     def __str__(self):
         return f"{self.brand} {self.model} ({self.year})"
