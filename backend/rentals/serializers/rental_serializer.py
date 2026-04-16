@@ -6,7 +6,13 @@ class RentalSerializer(serializers.ModelSerializer):
     user = serializers.ReadOnlyField(source = 'user.username')
     class Meta:
         model = Rental
-        fields = ['car','user', 'start_date','end_date', 'start_mileage','price_per_day']
+        fields = ['id','car','user', 'start_date','end_date', 'start_mileage','price_per_day', 'total_price']
+
+class CreateRentalSerializer(serializers.ModelSerializer):
+    user = serializers.ReadOnlyField(source = 'user.username')
+    class Meta:
+        model = Rental
+        fields = ['car', 'user', 'start_date', 'end_date']
 
     def validate(self,data):
         user = self.context['request'].user

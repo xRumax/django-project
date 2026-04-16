@@ -25,3 +25,4 @@ def check_car_availability(car, start_date, end_date, current_rental_id = None):
     
     if overlapping_rentals.exists():
         raise ValidationError("This car is already hired.")
+    
