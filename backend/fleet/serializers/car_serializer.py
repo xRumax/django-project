@@ -6,7 +6,7 @@ class CarSerializer(serializers.ModelSerializer):
     vin = serializers.CharField(write_only = True)
     class Meta:
         model = Car
-        fields = ['id','vin','brand','model', 'year','hp', 'engine_type','number_plate', 'price']
+        fields = ['id','vin','brand','model', 'year','hp', 'engine_type','number_plate']
 
         
     def validate(self,data):

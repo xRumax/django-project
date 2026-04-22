@@ -1,16 +1,23 @@
 from rest_framework.viewsets import ModelViewSet
-from rest_framework.permissions import IsAuthenticated, AllowAny, IsAdminUser
+from rest_framework.permissions import AllowAny, IsAdminUser
 from fleet.models.car import Car
 from fleet.serializers.car_serializer import CarSerializer
 from rest_framework.decorators import action 
 from rest_framework.response import Response 
-from rest_framework import status 
+from rest_framework import status, filters
 from drf_spectacular.utils import extend_schema, OpenApiParameter
 from ..services.car_services import CarExternalApiService
+from common.pagination import CustomPagination
+from django_filters.rest_framework import DjangoFilterBackend
 
 class CarViewSet(ModelViewSet):
     queryset = Car.objects.all().order_by("id")
     serializer_class = CarSerializer
+    pagination_class = CustomPagination
+
+    filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]
+
+    filterset_fields = ['brand', 'model']
 
     def get_permissions(self):
         if self.action in ['list', 'retrieve']:
